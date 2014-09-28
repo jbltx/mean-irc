@@ -1,6 +1,8 @@
 'use strict';
 
-var client, channel, irc;
+var irc = require('irc');
+var client;
+var channel;
 
 var Connect = function (req, res, next) {
   channel = req.body.channel;
@@ -25,6 +27,9 @@ var SendMessage = function (req, res, next) {
   }
 };
 
+
+
+// The Package is past automatically as first parameter
 module.exports = function(Irc, app, auth, database) {
   app.post('/irc/client/connect', auth.requiresLogin, Connect);
 
