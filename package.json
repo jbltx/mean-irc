@@ -11,7 +11,8 @@
     "npm": "1.4.x"
   },
   "dependencies": {
-	"irc": "0.3.7"
+	"irc": "0.3.7",
+	"socket.io": "latest"
   },
   "license": "MIT"
 }

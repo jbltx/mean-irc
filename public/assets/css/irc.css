@@ -1,3 +1,29 @@
-.irc-example h1 {
-  background-color: purple
+.w150 {
+	width: 150px;
+}
+.w100 {
+	width: 100px;
+}
+.w50 {
+	width: 50px;
+}
+.plusBtn {
+	display: inline;
+}
+.mini-container {
+	padding-left: 200px;
+	padding-right: 200px;
+}
+.text-left {
+	text-align: left;
+}
+.mt20 {
+	margin-top: 20px;
+}
+.irc-room {
+	resize: vertical;
+	cursor: default;
+}
+#message {
+	width: 80%;
 }

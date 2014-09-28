@@ -15,12 +15,6 @@ angular.module('mean.irc')
 		$scope.custom = true;
 		$scope.info = '';
 
-		if($scope.info === '') {
-			angular.element('#informations').hide();
-		}
-		else {
-			angular.element('#informations').show();
-		}
 		$scope.toggleCustom = function () {
 			$scope.custom = $scope.custom === false ? true: false;
 		};
@@ -29,11 +23,15 @@ angular.module('mean.irc')
 			if($scope.message !== undefined) {
 				var sendService = Irc.sendClientMsg($scope.message);
 				sendService.success(function (data) {
-					angular.element('#chat').append(data+'\n');
-					angular.element('#message').val('');				
+					if (data.status === 'sent') {
+						console.log('success: ' + JSON.stringify(data));	
+					}
+					else {
+						console.log('error: ' + JSON.stringify(data));
+					}
 				});
 				sendService.error(function (status, error) {
-					console.log(status + ' / ' + error);
+					console.log('error: ' + status + ' / ' + error);
 				});
 			}
 		};
@@ -45,13 +43,19 @@ angular.module('mean.irc')
 				credentials.port = $scope.port;
 				credentials.channel = $scope.channel;
 				credentials.login = $scope.login;
-				//var addon = $scope.addon;
+				var addon = $scope.addon;
+				for (var key in addon) {
+					if (addon[key] !== undefined) {
+						credentials[key] = addon[key];
+					}
+				}
 				var connectionService = Irc.connectToServer(credentials);
 				connectionService.success(function (data) {
-					console.log(data);
+					console.log('success: ' + JSON.stringify(data));
+					Irc.socket();
 				});
 				connectionService.error(function (status, error) {
-					console.log(status + ' / ' + error);
+					console.log('error: ' + status + ' / ' + error);
 				});
 			}else {
 				console.log('please fill all fields.');

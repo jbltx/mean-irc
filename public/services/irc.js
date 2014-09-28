@@ -9,6 +9,10 @@ angular.module('mean.irc').factory('Irc', ['$http',
       },
       connectToServer: function (credentials) {
       	return $http.post('/irc/client/connect', credentials);
+      },
+      socket: function () {
+      	console.log('socket...');
+      	
       }
     };
   }
